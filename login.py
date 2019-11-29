@@ -8,7 +8,7 @@
 
 import sys, os
 if hasattr(sys, 'frozen'):
-    os.environ['PATH'] = sys._MEIPASS + ";" + os.environ['PATH']
+    os.environ['PATH'] = sys._MEIPASS + ";" + os.environ['PATH']  # PyQt5库存在bug修复
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
