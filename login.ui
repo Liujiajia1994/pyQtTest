@@ -98,6 +98,19 @@
     <string>是否记住密码</string>
    </property>
   </widget>
+  <widget class="QLabel" name="Label_3">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>240</y>
+     <width>191</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
