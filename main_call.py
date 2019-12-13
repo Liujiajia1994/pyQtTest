@@ -12,6 +12,8 @@ class HelloLogin(QtWidgets.QWidget):
         self.ui.setupUi(self)
         # 给登录按钮 的 点击动作绑定一个事件处理函数
         self.ui.pushButton.clicked.connect(self.login)
+    #     重置 按钮
+        self.ui.pushButton_2.clicked.connect(self.reSet)
 
     def login(self):
         user = [
@@ -26,7 +28,7 @@ class HelloLogin(QtWidgets.QWidget):
         isLogin = False
         for i in user:
             # print(self.ui.LineEdit.text())
-            if self.ui.LineEdit.text() == i["name"] and self.ui.LineEdit.text() == i["password"]:
+            if self.ui.LineEdit.text().lower() == i["name"] and self.ui.LineEdit.text().lower() == i["password"]:
                 isLogin = True
                 try:
                     self.ui.text.setText("登录成功")
@@ -41,6 +43,10 @@ class HelloLogin(QtWidgets.QWidget):
             self.ui.text.setText("请重新输入")
         # print("hello")
         # self.ui.text.setText("登录成功")
+
+    def reSet(self):
+        self.ui.LineEdit.clear()
+        self.ui.LineEdit_2.clear()
 
 
 class MainWindow(QtWidgets.QMainWindow):
