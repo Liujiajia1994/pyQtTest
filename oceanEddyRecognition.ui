@@ -32,8 +32,8 @@
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>401</width>
-      <height>285</height>
+      <width>369</width>
+      <height>87</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -52,14 +52,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="gray_image">
+      <widget class="QLabel" name="image_show">
+       <property name="maximumSize">
+        <size>
+         <width>367</width>
+         <height>12</height>
+        </size>
+       </property>
        <property name="text">
-        <string>灰度展示：</string>
+        <string>预览：</string>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QGraphicsView" name="graphicsView"/>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -99,7 +102,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>450</x>

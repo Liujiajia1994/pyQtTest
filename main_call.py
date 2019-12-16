@@ -33,9 +33,7 @@ class HelloLogin(QtWidgets.QWidget):
                 try:
                     self.ui.text.setText("登录成功")
                     self.hide()
-                    self.child = QtWidgets.QMainWindow()
-                    self.childwindow = Ui_MainWindow()
-                    self.childwindow.setupUi(self.child)
+                    self.child = MainWindow()
                     self.child.show()
                 except:
                     self.ui.text.setText("登录失败")
