@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="extract">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>370</y>
+      <x>150</x>
+      <y>450</y>
       <width>75</width>
       <height>31</height>
      </rect>
@@ -33,7 +33,7 @@
       <x>20</x>
       <y>60</y>
       <width>369</width>
-      <height>87</height>
+      <height>373</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -52,15 +52,25 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="image_show">
-       <property name="maximumSize">
+      <widget class="QLabel" name="image_preshow">
+       <property name="text">
+        <string>预览：</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_show">
+       <property name="minimumSize">
         <size>
-         <width>367</width>
-         <height>12</height>
+         <width>280</width>
+         <height>280</height>
         </size>
        </property>
        <property name="text">
-        <string>预览：</string>
+        <string/>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

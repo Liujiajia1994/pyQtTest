@@ -3,6 +3,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from login import Ui_widget
 from oceanEddyRecognition import Ui_MainWindow
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtGui import QPixmap
 
 
 class HelloLogin(QtWidgets.QWidget):
@@ -56,7 +58,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ui.open_file.clicked.connect(self.openFile)
 
     def openFile(self):
-        pass
+        filename, _ = QFileDialog.getOpenFileName(self, "打开文件", "/", "image Files (*.png *.tif *.jpg)")
+        self.ui.label_show.setPixmap(QPixmap(filename))
 
 
 if __name__ == "__main__":
