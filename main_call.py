@@ -29,7 +29,6 @@ class HelloLogin(QtWidgets.QWidget):
         ]
         isLogin = False
         for i in user:
-            # print(self.ui.LineEdit.text())
             if self.ui.LineEdit.text().lower() == i["name"] and self.ui.LineEdit.text().lower() == i["password"]:
                 isLogin = True
                 try:
@@ -41,8 +40,6 @@ class HelloLogin(QtWidgets.QWidget):
                     self.ui.text.setText("登录失败")
         if isLogin == False :
             self.ui.text.setText("请重新输入")
-        # print("hello")
-        # self.ui.text.setText("登录成功")
 
     def reSet(self):
         self.ui.LineEdit.clear()
@@ -60,6 +57,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def openFile(self):
         filename, _ = QFileDialog.getOpenFileName(self, "打开文件", "/", "image Files (*.png *.tif *.jpg)")
         self.ui.label_show.setPixmap(QPixmap(filename))
+        self.ui.textEdit_info.append(filename)
 
 
 if __name__ == "__main__":
