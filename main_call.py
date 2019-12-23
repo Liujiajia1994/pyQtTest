@@ -1,3 +1,7 @@
+# 打包命令：1、安装pyinstaller  2、pyinstaller -F -w main_call.py -i logo.ico -n main
+# 环境：Python version 3.6.5
+# 安装 PyQt5，pyQt5-tools
+# 界面：Qt Designer；PyUIC
 # 这里主要是用来写业务逻辑
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -10,8 +14,11 @@ from PyQt5.QtGui import QPixmap
 class HelloLogin(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
+        # super(HelloLogin, self).__init__()
         self.ui = Ui_widget()
         self.ui.setupUi(self)
+        self.setWindowIcon(QIcon('E:/GitHub/pyQtTest/logo.ico'))
+        self.setWindowTitle('登录')
         # 给登录按钮 的 点击动作绑定一个事件处理函数
         self.ui.pushButton.clicked.connect(self.login)
     #     重置 按钮
@@ -46,18 +53,21 @@ class HelloLogin(QtWidgets.QWidget):
         self.ui.LineEdit_2.clear()
 
 
-class MainWindow(QtWidgets.QMainWindow):
+# 新建MainWindow类，继承生成的HelloLogin类
+class MainWindow(QtWidgets.QMainWindow, HelloLogin):
     def __init__(self):
-        QtWidgets.QMainWindow.__init__(self)
+        # QtWidgets.QMainWindow.__init__(self)
+        super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        self.setWindowTitle('海洋涡旋自动识别系统')
         #         打开文件，选择图片
         self.ui.open_file.clicked.connect(self.openFile)
 
     def openFile(self):
         filename, _ = QFileDialog.getOpenFileName(self, "打开文件", "/", "image Files (*.png *.tif *.jpg)")
         self.ui.label_show.setPixmap(QPixmap(filename))
-        self.ui.textEdit_info.append(filename)
+        self.ui.textEdit_info.setText("选择文件夹名称："+filename)
 
 
 if __name__ == "__main__":
@@ -65,12 +75,6 @@ if __name__ == "__main__":
     from PyQt5.QtGui import QIcon
 
     app = QtWidgets.QApplication(sys.argv)
-
     widget = HelloLogin()
-    # widget = QtWidgets.QWidget()
-    # ui = Ui_widget()
-    # ui.setupUi(widget)
-
-    widget.setWindowIcon(QIcon('logo.jpg'))  # 增加icon图标，如果没有图片可以没有这句
     widget.show()
     sys.exit(app.exec_())

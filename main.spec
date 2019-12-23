@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['login.py'],
+a = Analysis(['main_call.py'],
              pathex=['E:\\GitHub\\pyQtTest'],
              binaries=[],
              datas=[],
@@ -23,11 +23,11 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='login',
+          name='main',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=False )
+          console=False , icon='logo.ico')
