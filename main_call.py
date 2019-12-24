@@ -74,7 +74,7 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         self.setWindowTitle('海洋涡旋自动识别系统')
 
         paletteMain = QPalette()
-        paletteMain.setBrush(QPalette.Background, QBrush(QPixmap('E:/GitHub/pyQtTest/ocean_1.jpg')))
+        paletteMain.setBrush(QPalette.Background, QBrush(QPixmap('E:/GitHub/pyQtTest/login_bg.jpg')))
         self.setPalette(paletteMain)
 
         #         打开文件，选择图片
