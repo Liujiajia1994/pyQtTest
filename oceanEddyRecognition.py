@@ -21,9 +21,32 @@ class Ui_MainWindow(object):
         self.gridLayout.setContentsMargins(-1, 9, -1, -1)
         self.gridLayout.setObjectName("gridLayout")
         self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
+        self.tabWidget.setStyleSheet("QTabWidget::pane{\n"
+"    border:none;\n"
+"    background-color: rgb(255, 255, 255);\n"
+"}\n"
+"QTabWidget::tab-bar{\n"
+"    alignment:left;\n"
+"}\n"
+"QTabBar::tab{\n"
+"    background:transparent;\n"
+"    min-width:30ex;\n"
+"    min-height:10ex;\n"
+"}\n"
+"QTabBar::tab:hover{\n"
+"    background:rgb(255, 255, 255, 100);\n"
+"}\n"
+"QTabBar::tab:selected{\n"
+"    border-color: white;\n"
+"    background:white;\n"
+"    color:green;\n"
+"}\n"
+"")
+        self.tabWidget.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.tabWidget.setIconSize(QtCore.QSize(20, 20))
         self.tabWidget.setObjectName("tabWidget")
         self.tab_file = QtWidgets.QWidget()
+        self.tab_file.setStyleSheet("")
         self.tab_file.setObjectName("tab_file")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.tab_file)
         self.gridLayout_2.setObjectName("gridLayout_2")
@@ -68,7 +91,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setStretch(0, 1)
         self.horizontalLayout.setStretch(1, 1)
         self.gridLayout_2.addLayout(self.horizontalLayout, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.tab_file, "")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("E:/GitHub/pyQtTest/source/folder_opened_128px_1222856_easyicon.net.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+        self.tabWidget.addTab(self.tab_file, icon, "")
         self.tab_process = QtWidgets.QWidget()
         self.tab_process.setObjectName("tab_process")
         self.gridLayout_3 = QtWidgets.QGridLayout(self.tab_process)
@@ -121,7 +146,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setStretch(1, 1)
         self.horizontalLayout_2.setStretch(2, 2)
         self.gridLayout_3.addLayout(self.horizontalLayout_2, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.tab_process, "")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("E:/GitHub/pyQtTest/source/edit_image_128px_1169761_easyicon.net.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+        self.tabWidget.addTab(self.tab_process, icon1, "")
         self.tab_extract = QtWidgets.QWidget()
         self.tab_extract.setObjectName("tab_extract")
         self.gridLayout_4 = QtWidgets.QGridLayout(self.tab_extract)
@@ -156,10 +183,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setStretch(1, 1)
         self.horizontalLayout_3.setStretch(2, 2)
         self.gridLayout_4.addLayout(self.horizontalLayout_3, 0, 0, 1, 1)
-        self.tabWidget.addTab(self.tab_extract, "")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("E:/GitHub/pyQtTest/source/image_128px_1197371_easyicon.net.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+        self.tabWidget.addTab(self.tab_extract, icon2, "")
         self.tab_recognize = QtWidgets.QWidget()
         self.tab_recognize.setObjectName("tab_recognize")
-        self.tabWidget.addTab(self.tab_recognize, "")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("E:/GitHub/pyQtTest/source/detective_128px_1168533_easyicon.net.ico"), QtGui.QIcon.Selected, QtGui.QIcon.On)
+        self.tabWidget.addTab(self.tab_recognize, icon3, "")
         self.gridLayout.addWidget(self.tabWidget, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -180,7 +211,7 @@ class Ui_MainWindow(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">选择文件夹名称：</p></body></html>"))
         self.groupBox.setTitle(_translate("MainWindow", "预览"))
         self.image_preshow.setText(_translate("MainWindow", "选择预览的图片："))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_file), _translate("MainWindow", "1.打开文件"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_file), _translate("MainWindow", "打开文件"))
         self.groupBox_4.setTitle(_translate("MainWindow", "数据增强"))
         self.checkBox.setText(_translate("MainWindow", "随机裁剪"))
         self.checkBox_2.setText(_translate("MainWindow", "尺度变换"))
@@ -194,12 +225,12 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "2"))
         self.label_7.setText(_translate("MainWindow", "3"))
         self.label_8.setText(_translate("MainWindow", "4"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_process), _translate("MainWindow", "2.预处理"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_process), _translate("MainWindow", "预处理"))
         self.groupBox_6.setTitle(_translate("MainWindow", "特征选择"))
         self.checkBox_FD.setText(_translate("MainWindow", "FD形状特征"))
         self.checkBox_Harris.setText(_translate("MainWindow", "Harris角点特征"))
         self.checkBox_GLCM.setText(_translate("MainWindow", "GLCM纹理特征"))
         self.extract.setText(_translate("MainWindow", "提取特征"))
         self.groupBox_7.setTitle(_translate("MainWindow", "特征信息"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_extract), _translate("MainWindow", "3.特征提取"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_recognize), _translate("MainWindow", "4.训练与识别"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_extract), _translate("MainWindow", "特征提取"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_recognize), _translate("MainWindow", "训练与识别"))

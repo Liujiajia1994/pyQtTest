@@ -26,6 +26,32 @@
     </property>
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="styleSheet">
+       <string notr="true">QTabWidget::pane{
+	border:none;
+	background-color: rgb(255, 255, 255);
+}
+QTabWidget::tab-bar{
+    alignment:left;
+}
+QTabBar::tab{
+	background:transparent;
+	min-width:30ex;
+	min-height:10ex;
+}
+QTabBar::tab:hover{
+	background:rgb(255, 255, 255, 100);
+}
+QTabBar::tab:selected{
+	border-color: white;
+	background:white;
+	color:green;
+}
+</string>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -36,8 +62,16 @@
        </size>
       </property>
       <widget class="QWidget" name="tab_file">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <attribute name="icon">
+        <iconset>
+         <selectedon>source/folder_opened_128px_1222856_easyicon.net.ico</selectedon>
+        </iconset>
+       </attribute>
        <attribute name="title">
-        <string extracomment="打开文件">1.打开文件</string>
+        <string>打开文件</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
@@ -171,8 +205,13 @@ p, li { white-space: pre-wrap; }
        </layout>
       </widget>
       <widget class="QWidget" name="tab_process">
+       <attribute name="icon">
+        <iconset>
+         <selectedon>source/edit_image_128px_1169761_easyicon.net.ico</selectedon>
+        </iconset>
+       </attribute>
        <attribute name="title">
-        <string>2.预处理</string>
+        <string>预处理</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
@@ -351,8 +390,13 @@ p, li { white-space: pre-wrap; }
        </layout>
       </widget>
       <widget class="QWidget" name="tab_extract">
+       <attribute name="icon">
+        <iconset>
+         <selectedon>source/image_128px_1197371_easyicon.net.ico</selectedon>
+        </iconset>
+       </attribute>
        <attribute name="title">
-        <string>3.特征提取</string>
+        <string>特征提取</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
@@ -450,8 +494,13 @@ p, li { white-space: pre-wrap; }
        </layout>
       </widget>
       <widget class="QWidget" name="tab_recognize">
+       <attribute name="icon">
+        <iconset>
+         <selectedon>source/detective_128px_1168533_easyicon.net.ico</selectedon>
+        </iconset>
+       </attribute>
        <attribute name="title">
-        <string>4.训练与识别</string>
+        <string>训练与识别</string>
        </attribute>
       </widget>
      </widget>
@@ -459,6 +508,8 @@ p, li { white-space: pre-wrap; }
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="source/openFile.ico"/>
+ </resources>
  <connections/>
 </ui>
