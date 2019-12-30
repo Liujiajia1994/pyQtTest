@@ -1,7 +1,3 @@
-# 打包命令：1、安装pyinstaller  2、pyinstaller -F -w main_call.py -i logo.ico -n main
-# 环境：Python version 3.6.5
-# 安装 PyQt5，pyQt5-tools
-# 界面：Qt Designer；PyUIC
 # 这里主要是用来写业务逻辑
 import sys, os
 if hasattr(sys, 'frozen'):
@@ -10,7 +6,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from login import Ui_widget
 from oceanEddyRecognition import Ui_MainWindow
 from PyQt5.QtWidgets import QFileDialog
-from PyQt5.QtGui import QPixmap, QPalette, QBrush
+from PyQt5.QtGui import QPixmap, QPalette, QBrush, QImage
+import cv2
+from imageAlgorithm.image_gray import *
 
 
 class HelloLogin(QtWidgets.QWidget):
@@ -63,7 +61,7 @@ class HelloLogin(QtWidgets.QWidget):
         self.ui.LineEdit_2.clear()
 
 
-# 新建MainWindow类，继承生成的HelloLogin类
+# 新建MainWindow类
 class MainWindow(QtWidgets.QMainWindow, HelloLogin):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
@@ -73,17 +71,56 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         self.setWindowIcon(QIcon('E:/GitHub/pyQtTest/logo_2.png'))
         self.setWindowTitle('海洋涡旋自动识别系统')
 
+        # 定义一些该类的变量
+        self.filePath = ''
+        self.gray_dir = ''
+
         paletteMain = QPalette()
         paletteMain.setBrush(QPalette.Background, QBrush(QPixmap('E:/GitHub/pyQtTest/login_bg.jpg')))
         self.setPalette(paletteMain)
 
-        #         打开文件，选择图片
+        # 打开文件，选择图片
         self.ui.open_file.clicked.connect(self.openFile)
+        # 下拉框选中时间
+        self.ui.comboBox.currentIndexChanged.connect(self.changeImage)
 
     def openFile(self):
-        filename, _ = QFileDialog.getOpenFileName(self, "打开文件", "/", "image Files (*.png *.tif *.jpg)")
-        self.ui.label_show.setPixmap(QPixmap(filename))
-        self.ui.textEdit_info.setText("选择文件夹名称："+filename)
+        # 打开文件
+        # filename, _ = QFileDialog.getOpenFileName(self, "打开文件", "/", "image Files (*.png *.tif *.jpg)")
+        # self.ui.label_show.setPixmap(QPixmap(filename))
+        # self.ui.textEdit_info.setText("选择文件夹名称："+filename)
+        # 打开文件夹
+        filePath = QFileDialog.getExistingDirectory(self, "打开文件夹", "/", )
+        self.filePath = filePath
+        self.ui.textEdit_info.setText("选择文件夹名称：" + filePath)
+        # 读取该文件夹下的所有文件
+        fileList = os.listdir(filePath)
+        #  下拉框中显示文件夹下所有图片
+        fileLength = len(fileList)
+        self.ui.textEdit_info.append('\n'+'文件夹中图片个数：'+ str(fileLength))
+        # 清空已有的comboBox里的所有item
+        self.ui.comboBox.clear()
+        # 添加新的item
+        for i in range(fileLength):
+            print(fileList[i])
+            self.ui.comboBox.addItem(fileList[i])
+        # 根据选中的图片在下方的label框中显示
+        self.ui.label_show.setPixmap(QPixmap(filePath + '/' + fileList[0]))
+        self.ui.textEdit_info.append('\n' + '灰度处理中。。。')
+        # 将该文件夹下的所有图片转灰度存入文件夹中
+        return_resluts = image_to_gray(self.filePath)
+        self.gray_dir = return_resluts[0]
+        gray_results = return_resluts[1]
+        self.ui.textEdit_info.append('\n' + '灰度图像文件夹：'+self.gray_dir)
+        self.ui.textEdit_info.append('\n'+gray_results)
+        #  将灰度图像显示在label_show_gray框中
+        self.ui.label_show_gray.setPixmap(QPixmap(self.gray_dir+'/'+fileList[0]))
+
+    def changeImage(self):
+        # 载入数据 下拉框切换
+        selectedImage = self.ui.comboBox.currentText()
+        self.ui.label_show.setPixmap(QPixmap(self.filePath+'/'+selectedImage))
+        self.ui.label_show_gray.setPixmap(QPixmap(self.gray_dir + '/' + selectedImage))
 
 
 if __name__ == "__main__":
