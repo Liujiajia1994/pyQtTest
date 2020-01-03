@@ -67,7 +67,7 @@ QTabBar::tab:selected{
        </property>
        <attribute name="icon">
         <iconset>
-         <selectedon>source/folder_opened_128px_1222856_easyicon.net.ico</selectedon>
+         <selectedon>C:/Users/lenovo/.designer/backup/source/folder_opened_128px_1222856_easyicon.net.ico</selectedon>
         </iconset>
        </attribute>
        <attribute name="title">
@@ -127,7 +127,7 @@ QPushButton:pressed{
 }</string>
                </property>
                <property name="text">
-                <string>浏览文件</string>
+                <string>浏览文件夹</string>
                </property>
                <property name="iconSize">
                 <size>
@@ -300,13 +300,13 @@ p, li { white-space: pre-wrap; }
       <widget class="QWidget" name="tab_process">
        <attribute name="icon">
         <iconset>
-         <selectedon>source/edit_image_128px_1169761_easyicon.net.ico</selectedon>
+         <selectedon>C:/Users/lenovo/.designer/backup/source/edit_image_128px_1169761_easyicon.net.ico</selectedon>
         </iconset>
        </attribute>
        <attribute name="title">
         <string>预处理</string>
        </attribute>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -376,7 +376,7 @@ QPushButton:pressed{
                <string>确定</string>
               </property>
              </widget>
-             <widget class="QWidget" name="">
+             <widget class="QWidget" name="layoutWidget">
               <property name="geometry">
                <rect>
                 <x>50</x>
@@ -515,7 +515,7 @@ p, li { white-space: pre-wrap; }
              </property>
             </item>
            </widget>
-           <widget class="QWidget" name="">
+           <widget class="QWidget" name="layoutWidget">
             <property name="geometry">
              <rect>
               <x>10</x>
@@ -599,7 +599,7 @@ p, li { white-space: pre-wrap; }
       <widget class="QWidget" name="tab_extract">
        <attribute name="icon">
         <iconset>
-         <selectedon>source/image_128px_1197371_easyicon.net.ico</selectedon>
+         <selectedon>C:/Users/lenovo/.designer/backup/source/image_128px_1197371_easyicon.net.ico</selectedon>
         </iconset>
        </attribute>
        <attribute name="title">
@@ -731,7 +731,7 @@ QPushButton:pressed{
       <widget class="QWidget" name="tab_recognize">
        <attribute name="icon">
         <iconset>
-         <selectedon>source/detective_128px_1168533_easyicon.net.ico</selectedon>
+         <selectedon>C:/Users/lenovo/.designer/backup/source/detective_128px_1168533_easyicon.net.ico</selectedon>
         </iconset>
        </attribute>
        <attribute name="title">
