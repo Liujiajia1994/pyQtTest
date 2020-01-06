@@ -7,8 +7,10 @@ from login import Ui_widget
 from oceanEddyRecognition import Ui_MainWindow
 from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtGui import QPixmap, QPalette, QBrush, QImage
+from PyQt5.QtCore import Qt
 import cv2
 from imageAlgorithm.image_gray import *
+from imageAlgorithm.image_preprocess import *
 
 
 class HelloLogin(QtWidgets.QWidget):
@@ -74,6 +76,7 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         # 定义一些该类的变量
         self.filePath = ''
         self.gray_dir = ''
+        # self.processMethods = []
 
         paletteMain = QPalette()
         paletteMain.setBrush(QPalette.Background, QBrush(QPixmap('E:/GitHub/pyQtTest/login_bg.jpg')))
@@ -83,6 +86,12 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         self.ui.open_file.clicked.connect(self.openFile)
         # 下拉框选中时间
         self.ui.comboBox.currentIndexChanged.connect(self.changeImage)
+        # 多选框 状态控制事件
+        self.ui.checkBox_random.stateChanged.connect(lambda: self.augumentMethods(self.ui.checkBox_random))
+        self.ui.checkBox_scale.stateChanged.connect(lambda: self.augumentMethods(self.ui.checkBox_scale))
+        self.ui.checkBox_rotate.stateChanged.connect(lambda: self.augumentMethods(self.ui.checkBox_rotate))
+        # 预处理 确定按钮
+        self.ui.pushButtoncheck.clicked.connect(self.preProcess)
 
     def openFile(self):
         # 打开文件
@@ -121,6 +130,37 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         selectedImage = self.ui.comboBox.currentText()
         self.ui.label_show.setPixmap(QPixmap(self.filePath+'/'+selectedImage))
         self.ui.label_show_gray.setPixmap(QPixmap(self.gray_dir + '/' + selectedImage))
+
+    def augumentMethods(self, checkBox):
+        print(checkBox.isChecked())
+        if checkBox.isChecked():
+            self.ui.textEdit_info_2.append("已选择："+ checkBox.text())
+        else:
+            self.ui.textEdit_info_2.append("取消选择：" + checkBox.text())
+
+    def preProcess(self):
+        if self.filePath:
+            self.ui.textEdit_info_2.append("已载入数据，文件路径："+self.filePath)
+            # 获取多选框中的选项
+            checkBoxes = [self.ui.checkBox_rotate, self.ui.checkBox_scale, self.ui.checkBox_random]
+            self.ui.textEdit_info_2.append("最终确定扩充方式：")
+            # 信息显示 并将 扩充方式 添加进下拉框
+            self.ui.comboBox_2.clear()
+            for box in checkBoxes:
+                if box.isChecked():
+                    self.ui.textEdit_info_2.append(box.text())
+                    # 扩充处理
+                    if box.text() == "随机裁剪":
+                        cropResults = defined_crop(self.filePath)
+                    # elif box.text() == "尺度变换":
+                    #     scaleResults = scale_augmentation(self.filePath)
+                    # else:
+                    #     # 旋转变换
+                    #     rotateResults = random_rotation(self.filePath)
+                    self.ui.comboBox_2.addItem(box.text())
+
+        else:
+            self.ui.textEdit_info_2.append("未载入数据，请至载入数据模块")
 
 
 if __name__ == "__main__":
