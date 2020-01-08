@@ -4,12 +4,9 @@ import cv2
 import matplotlib.pyplot as plt
 
 
-def image_to_gray(dir):
+def image_to_gray(dir, saveDir):
     # 获取文件的个数
-    # DIR = 'E:/GitHub/pyQtTest/ImagesDataset/SAR_images'
-    # length = len([name for name in os.listdir(DIR) if os.path.isfile(os.path.join(DIR, name))])
     i = 1
-    saveDir = 'E:/GitHub/pyQtTest/ImagesDataset/SAR_gray_images'
     returnStatus = []
     for filename in os.listdir(dir):
         fig, ax = plt.subplots()
