@@ -538,7 +538,7 @@ p, li { white-space: pre-wrap; }
               <property name="geometry">
                <rect>
                 <x>180</x>
-                <y>190</y>
+                <y>170</y>
                 <width>171</width>
                 <height>151</height>
                </rect>
@@ -560,7 +560,7 @@ p, li { white-space: pre-wrap; }
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>20</y>
+                <y>0</y>
                 <width>171</width>
                 <height>151</height>
                </rect>
@@ -584,7 +584,7 @@ p, li { white-space: pre-wrap; }
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>190</y>
+                <y>170</y>
                 <width>171</width>
                 <height>151</height>
                </rect>
@@ -608,13 +608,16 @@ p, li { white-space: pre-wrap; }
               <property name="geometry">
                <rect>
                 <x>180</x>
-                <y>20</y>
+                <y>0</y>
                 <width>171</width>
                 <height>151</height>
                </rect>
               </property>
               <property name="text">
                <string>暂无</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>
@@ -660,6 +663,9 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="text">
                <string>暂无</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>

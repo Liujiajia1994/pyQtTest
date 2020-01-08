@@ -236,13 +236,13 @@ class Ui_MainWindow(object):
         self.tab_origin = QtWidgets.QWidget()
         self.tab_origin.setObjectName("tab_origin")
         self.label_show_one = QtWidgets.QLabel(self.tab_origin)
-        self.label_show_one.setGeometry(QtCore.QRect(180, 190, 171, 151))
+        self.label_show_one.setGeometry(QtCore.QRect(180, 170, 171, 151))
         self.label_show_one.setStyleSheet("Qlabel{border: 2px solid rgb(0, 0, 0)}")
         self.label_show_one.setScaledContents(True)
         self.label_show_one.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_one.setObjectName("label_show_one")
         self.label_show_two = QtWidgets.QLabel(self.tab_origin)
-        self.label_show_two.setGeometry(QtCore.QRect(0, 20, 171, 151))
+        self.label_show_two.setGeometry(QtCore.QRect(0, 0, 171, 151))
         self.label_show_two.setStyleSheet("Qlabel{\n"
 "    border: 2px solid rgb(0, 0, 0)\n"
 "}")
@@ -250,7 +250,7 @@ class Ui_MainWindow(object):
         self.label_show_two.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_two.setObjectName("label_show_two")
         self.label_show_three = QtWidgets.QLabel(self.tab_origin)
-        self.label_show_three.setGeometry(QtCore.QRect(0, 190, 171, 151))
+        self.label_show_three.setGeometry(QtCore.QRect(0, 170, 171, 151))
         self.label_show_three.setStyleSheet("Qlabel{\n"
 "    border: 2px solid rgb(0, 0, 0)\n"
 "}")
@@ -258,7 +258,8 @@ class Ui_MainWindow(object):
         self.label_show_three.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_three.setObjectName("label_show_three")
         self.label_show_four = QtWidgets.QLabel(self.tab_origin)
-        self.label_show_four.setGeometry(QtCore.QRect(180, 20, 171, 151))
+        self.label_show_four.setGeometry(QtCore.QRect(180, 0, 171, 151))
+        self.label_show_four.setScaledContents(True)
         self.label_show_four.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_four.setObjectName("label_show_four")
         self.tabWidget_3.addTab(self.tab_origin, "")
@@ -274,6 +275,7 @@ class Ui_MainWindow(object):
         self.label_gray_one.setObjectName("label_gray_one")
         self.label_gray_two = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_two.setGeometry(QtCore.QRect(180, 0, 171, 151))
+        self.label_gray_two.setScaledContents(True)
         self.label_gray_two.setAlignment(QtCore.Qt.AlignCenter)
         self.label_gray_two.setObjectName("label_gray_two")
         self.label_gray_three = QtWidgets.QLabel(self.tab_gray)
