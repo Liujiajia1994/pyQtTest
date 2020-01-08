@@ -24,7 +24,7 @@
     <property name="topMargin">
      <number>9</number>
     </property>
-    <item row="0" column="0">
+    <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="styleSheet">
        <string notr="true">QTabWidget::pane{
@@ -485,7 +485,7 @@ p, li { white-space: pre-wrap; }
            <property name="title">
             <string>预览</string>
            </property>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="label_preshow_2">
             <property name="geometry">
              <rect>
               <x>10</x>
@@ -741,7 +741,7 @@ p, li { white-space: pre-wrap; }
              </widget>
             </widget>
            </widget>
-           <widget class="QLabel" name="image_preshow_2">
+           <widget class="QLabel" name="label_preshow_1">
             <property name="geometry">
              <rect>
               <x>10</x>
@@ -782,9 +782,9 @@ p, li { white-space: pre-wrap; }
             </item>
            </widget>
            <zorder>tabWidget_3</zorder>
-           <zorder>label</zorder>
+           <zorder>label_preshow_2</zorder>
            <zorder>comboBox_2</zorder>
-           <zorder>image_preshow_2</zorder>
+           <zorder>label_preshow_1</zorder>
            <zorder>comboBox_3</zorder>
           </widget>
          </item>
@@ -800,71 +800,46 @@ p, li { white-space: pre-wrap; }
        <attribute name="title">
         <string>特征提取</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="2,1,2">
-          <item>
-           <widget class="QGroupBox" name="groupBox_6">
-            <property name="minimumSize">
-             <size>
-              <width>301</width>
-              <height>481</height>
-             </size>
-            </property>
-            <property name="title">
-             <string>特征选择</string>
-            </property>
-            <widget class="QCheckBox" name="checkBox_FD">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>270</y>
-               <width>111</width>
-               <height>16</height>
-              </rect>
+       <widget class="QWidget" name="">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>752</width>
+          <height>488</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QGroupBox" name="groupBox_6">
+             <property name="minimumSize">
+              <size>
+               <width>371</width>
+               <height>217</height>
+              </size>
              </property>
-             <property name="text">
-              <string>FD形状特征</string>
+             <property name="title">
+              <string>特征选择</string>
              </property>
-            </widget>
-            <widget class="QCheckBox" name="checkBox_Harris">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>78</y>
-               <width>111</width>
-               <height>16</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>Harris角点特征</string>
-             </property>
-            </widget>
-            <widget class="QCheckBox" name="checkBox_GLCM">
-             <property name="geometry">
-              <rect>
-               <x>40</x>
-               <y>174</y>
-               <width>111</width>
-               <height>16</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>GLCM纹理特征</string>
-             </property>
-            </widget>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="extract">
-            <property name="minimumSize">
-             <size>
-              <width>101</width>
-              <height>51</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{  
+             <widget class="QPushButton" name="extract">
+              <property name="geometry">
+               <rect>
+                <x>130</x>
+                <y>150</y>
+                <width>107</width>
+                <height>51</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>101</width>
+                <height>51</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{  
     border: 1px solid #ffffff;    
 	background-color:#62d8fe;
     border-style: solid;  
@@ -890,38 +865,282 @@ QPushButton:pressed{
     padding:0 0px;  
     border-radius:5px;  
 }</string>
+              </property>
+              <property name="text">
+               <string>提取特征</string>
+              </property>
+             </widget>
+             <widget class="QWidget" name="">
+              <property name="geometry">
+               <rect>
+                <x>50</x>
+                <y>30</y>
+                <width>248</width>
+                <height>78</height>
+               </rect>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_5">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="checkBox_Harris">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>35</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Harris角点特征</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QCheckBox" name="checkBox_FD">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>35</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>FD形状特征</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="checkBox_GLCM">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>35</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>GLCM纹理特征</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_7">
+             <property name="minimumSize">
+              <size>
+               <width>331</width>
+               <height>261</height>
+              </size>
+             </property>
+             <property name="title">
+              <string>特征信息</string>
+             </property>
+             <widget class="QTextEdit" name="textEdit_info_3">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>30</y>
+                <width>341</width>
+                <height>151</height>
+               </rect>
+              </property>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QGroupBox" name="groupBox_9">
+           <property name="minimumSize">
+            <size>
+             <width>371</width>
+             <height>486</height>
+            </size>
+           </property>
+           <property name="title">
+            <string>预览</string>
+           </property>
+           <widget class="QComboBox" name="comboBox_4">
+            <property name="geometry">
+             <rect>
+              <x>130</x>
+              <y>30</y>
+              <width>171</width>
+              <height>30</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+	font-family: &quot;微软雅黑&quot;;
+    color: black;
+    border: 1px #1a1a1a solid;
+	background-color:#62d8fe;
+}
+</string>
+            </property>
+            <property name="currentText">
+             <string>请选择</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>请选择</string>
+             </property>
+            </item>
+           </widget>
+           <widget class="QLabel" name="label_extract_show_1">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>30</y>
+              <width>121</width>
+              <height>30</height>
+             </rect>
             </property>
             <property name="text">
-             <string>提取特征</string>
+             <string>选择预览的图片：</string>
             </property>
            </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_7">
+           <widget class="QComboBox" name="comboBox_5">
+            <property name="geometry">
+             <rect>
+              <x>130</x>
+              <y>80</y>
+              <width>171</width>
+              <height>30</height>
+             </rect>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QComboBox {
+	font-family: &quot;微软雅黑&quot;;
+    color: black;
+    border: 1px #1a1a1a solid;
+	background-color:#62d8fe;
+}
+</string>
+            </property>
+            <item>
+             <property name="text">
+              <string>请选择</string>
+             </property>
+            </item>
+           </widget>
+           <widget class="QLabel" name="label_extract_show_2">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>80</y>
+              <width>121</width>
+              <height>30</height>
+             </rect>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>331</width>
-              <height>481</height>
+              <width>121</width>
+              <height>30</height>
              </size>
             </property>
-            <property name="title">
-             <string>特征信息</string>
+            <property name="text">
+             <string>选择预览的特征：</string>
             </property>
-            <widget class="QTextEdit" name="textEdit">
-             <property name="geometry">
-              <rect>
-               <x>20</x>
-               <y>40</y>
-               <width>291</width>
-               <height>221</height>
-              </rect>
-             </property>
+           </widget>
+           <widget class="QTabWidget" name="tabWidget_4">
+            <property name="geometry">
+             <rect>
+              <x>10</x>
+              <y>130</y>
+              <width>351</width>
+              <height>351</height>
+             </rect>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="tab_origin_2">
+             <attribute name="title">
+              <string>原图</string>
+             </attribute>
+             <widget class="QLabel" name="label_extract_origin">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>351</width>
+                <height>321</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>351</width>
+                <height>300</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>351</width>
+                <height>351</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
+}</string>
+              </property>
+              <property name="text">
+               <string>暂无</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </widget>
+            <widget class="QWidget" name="tab_gray_2">
+             <attribute name="title">
+              <string>灰度图</string>
+             </attribute>
+             <widget class="QLabel" name="label_extract_gray">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>351</width>
+                <height>321</height>
+               </rect>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>351</width>
+                <height>300</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>351</width>
+                <height>351</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
+}</string>
+              </property>
+              <property name="text">
+               <string>暂无</string>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
             </widget>
            </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_recognize">
        <attribute name="icon">
