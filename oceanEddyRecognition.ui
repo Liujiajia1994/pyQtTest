@@ -258,8 +258,13 @@ p, li { white-space: pre-wrap; }
                  <height>351</height>
                 </size>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
+}</string>
+               </property>
                <property name="text">
-                <string>暂无图片</string>
+                <string>暂无</string>
                </property>
                <property name="scaledContents">
                 <bool>true</bool>
@@ -282,8 +287,13 @@ p, li { white-space: pre-wrap; }
                  <height>351</height>
                 </rect>
                </property>
+               <property name="styleSheet">
+                <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
+}</string>
+               </property>
                <property name="text">
-                <string>暂无图片</string>
+                <string>暂无</string>
                </property>
                <property name="scaledContents">
                 <bool>true</bool>
@@ -544,7 +554,7 @@ p, li { white-space: pre-wrap; }
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">Qlabel{border: 2px solid rgb(0, 0, 0)}</string>
+               <string notr="true">QLabel{border: 1px solid rgb(0, 0, 0)}</string>
               </property>
               <property name="text">
                <string>暂无</string>
@@ -566,8 +576,8 @@ p, li { white-space: pre-wrap; }
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">Qlabel{
-	border: 2px solid rgb(0, 0, 0)
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
 }</string>
               </property>
               <property name="text">
@@ -590,8 +600,8 @@ p, li { white-space: pre-wrap; }
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">Qlabel{
-	border: 2px solid rgb(0, 0, 0)
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
 }</string>
               </property>
               <property name="text">
@@ -612,6 +622,11 @@ p, li { white-space: pre-wrap; }
                 <width>171</width>
                 <height>151</height>
                </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
+}</string>
               </property>
               <property name="text">
                <string>暂无</string>
@@ -638,8 +653,8 @@ p, li { white-space: pre-wrap; }
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">Qlabel{
-	border: 2px solid rgb(0, 0, 0)
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
 }</string>
               </property>
               <property name="text">
@@ -661,6 +676,11 @@ p, li { white-space: pre-wrap; }
                 <height>151</height>
                </rect>
               </property>
+              <property name="styleSheet">
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
+}</string>
+              </property>
               <property name="text">
                <string>暂无</string>
               </property>
@@ -681,8 +701,8 @@ p, li { white-space: pre-wrap; }
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">Qlabel{
-	border: 2px solid rgb(0, 0, 0)
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
 }</string>
               </property>
               <property name="text">
@@ -705,7 +725,9 @@ p, li { white-space: pre-wrap; }
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">Qlabel{border: 2px solid rgb(0, 0, 0)}</string>
+               <string notr="true">QLabel{
+	border: 1px solid rgb(0, 0, 0)
+}</string>
               </property>
               <property name="text">
                <string>暂无</string>

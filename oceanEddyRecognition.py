@@ -123,6 +123,9 @@ class Ui_MainWindow(object):
         self.label_show.setGeometry(QtCore.QRect(0, 0, 351, 351))
         self.label_show.setMinimumSize(QtCore.QSize(351, 351))
         self.label_show.setMaximumSize(QtCore.QSize(351, 351))
+        self.label_show.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
+"}")
         self.label_show.setScaledContents(True)
         self.label_show.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show.setObjectName("label_show")
@@ -131,6 +134,9 @@ class Ui_MainWindow(object):
         self.tab_2.setObjectName("tab_2")
         self.label_show_gray = QtWidgets.QLabel(self.tab_2)
         self.label_show_gray.setGeometry(QtCore.QRect(0, 0, 351, 351))
+        self.label_show_gray.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
+"}")
         self.label_show_gray.setScaledContents(True)
         self.label_show_gray.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_gray.setObjectName("label_show_gray")
@@ -237,28 +243,31 @@ class Ui_MainWindow(object):
         self.tab_origin.setObjectName("tab_origin")
         self.label_show_one = QtWidgets.QLabel(self.tab_origin)
         self.label_show_one.setGeometry(QtCore.QRect(180, 170, 171, 151))
-        self.label_show_one.setStyleSheet("Qlabel{border: 2px solid rgb(0, 0, 0)}")
+        self.label_show_one.setStyleSheet("QLabel{border: 1px solid rgb(0, 0, 0)}")
         self.label_show_one.setScaledContents(True)
         self.label_show_one.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_one.setObjectName("label_show_one")
         self.label_show_two = QtWidgets.QLabel(self.tab_origin)
         self.label_show_two.setGeometry(QtCore.QRect(0, 0, 171, 151))
-        self.label_show_two.setStyleSheet("Qlabel{\n"
-"    border: 2px solid rgb(0, 0, 0)\n"
+        self.label_show_two.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
 "}")
         self.label_show_two.setScaledContents(True)
         self.label_show_two.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_two.setObjectName("label_show_two")
         self.label_show_three = QtWidgets.QLabel(self.tab_origin)
         self.label_show_three.setGeometry(QtCore.QRect(0, 170, 171, 151))
-        self.label_show_three.setStyleSheet("Qlabel{\n"
-"    border: 2px solid rgb(0, 0, 0)\n"
+        self.label_show_three.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
 "}")
         self.label_show_three.setScaledContents(True)
         self.label_show_three.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_three.setObjectName("label_show_three")
         self.label_show_four = QtWidgets.QLabel(self.tab_origin)
         self.label_show_four.setGeometry(QtCore.QRect(180, 0, 171, 151))
+        self.label_show_four.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
+"}")
         self.label_show_four.setScaledContents(True)
         self.label_show_four.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_four.setObjectName("label_show_four")
@@ -267,28 +276,33 @@ class Ui_MainWindow(object):
         self.tab_gray.setObjectName("tab_gray")
         self.label_gray_one = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_one.setGeometry(QtCore.QRect(0, 0, 171, 151))
-        self.label_gray_one.setStyleSheet("Qlabel{\n"
-"    border: 2px solid rgb(0, 0, 0)\n"
+        self.label_gray_one.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
 "}")
         self.label_gray_one.setScaledContents(True)
         self.label_gray_one.setAlignment(QtCore.Qt.AlignCenter)
         self.label_gray_one.setObjectName("label_gray_one")
         self.label_gray_two = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_two.setGeometry(QtCore.QRect(180, 0, 171, 151))
+        self.label_gray_two.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
+"}")
         self.label_gray_two.setScaledContents(True)
         self.label_gray_two.setAlignment(QtCore.Qt.AlignCenter)
         self.label_gray_two.setObjectName("label_gray_two")
         self.label_gray_three = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_three.setGeometry(QtCore.QRect(0, 170, 171, 151))
-        self.label_gray_three.setStyleSheet("Qlabel{\n"
-"    border: 2px solid rgb(0, 0, 0)\n"
+        self.label_gray_three.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
 "}")
         self.label_gray_three.setScaledContents(True)
         self.label_gray_three.setAlignment(QtCore.Qt.AlignCenter)
         self.label_gray_three.setObjectName("label_gray_three")
         self.label_gray_four = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_four.setGeometry(QtCore.QRect(180, 170, 171, 151))
-        self.label_gray_four.setStyleSheet("Qlabel{border: 2px solid rgb(0, 0, 0)}")
+        self.label_gray_four.setStyleSheet("QLabel{\n"
+"    border: 1px solid rgb(0, 0, 0)\n"
+"}")
         self.label_gray_four.setScaledContents(True)
         self.label_gray_four.setAlignment(QtCore.Qt.AlignCenter)
         self.label_gray_four.setObjectName("label_gray_four")
@@ -408,9 +422,9 @@ class Ui_MainWindow(object):
         self.image_preshow.setText(_translate("MainWindow", "选择预览的图片："))
         self.comboBox.setCurrentText(_translate("MainWindow", "请选择"))
         self.comboBox.setItemText(0, _translate("MainWindow", "请选择"))
-        self.label_show.setText(_translate("MainWindow", "暂无图片"))
+        self.label_show.setText(_translate("MainWindow", "暂无"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab), _translate("MainWindow", "原图"))
-        self.label_show_gray.setText(_translate("MainWindow", "暂无图片"))
+        self.label_show_gray.setText(_translate("MainWindow", "暂无"))
         self.tabWidget_2.setTabText(self.tabWidget_2.indexOf(self.tab_2), _translate("MainWindow", "灰度图"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_file), _translate("MainWindow", "载入数据"))
         self.groupBox_4.setTitle(_translate("MainWindow", "数据扩充"))
