@@ -12,7 +12,7 @@ import random
 save_file = 'E:/GitHub/pyQtTest/ImagesDataset/SAR_augument_images'
 
 
-# 裁剪图片的四个71*71，以及中间的一块
+# 裁剪图片的四个角，以及中间的一块
 def defined_crop(dir):
     i = 1
     returnStatus = []
@@ -27,6 +27,10 @@ def defined_crop(dir):
             crop_img2 = img[int(h / 4):h, 1:int(3 * w / 4)]
             crop_img3 = img[1:int(3 * h / 4), int(w / 4):w]
             crop_img4 = img[int(h / 4):h, int(w / 4):w]
+            crop_img1 = imresize(crop_img1, (280, 280))
+            crop_img2 = imresize(crop_img2, (280, 280))
+            crop_img3 = imresize(crop_img3, (280, 280))
+            crop_img4 = imresize(crop_img4, (280, 280))
             isExists = os.path.exists(save_file)
             if not isExists:
                 os.makedirs(save_file)
@@ -84,36 +88,39 @@ def center_crop(image, crop_size):
     return image
 
 
-def save_image(image, imagefile):
-    image = np.asarray(image, dtype=np.uint8)
-    image = Image.fromarray(image)
-    image.save(imagefile)
-
-
-# 文件重命名
-def file_rename():
-    count = 0
-    path = save_file
-    filelist = os.listdir(path)#该文件夹下所有的文件（包括文件夹）
-    for files in filelist:#遍历所有文件
-        Olddir = os.path.join(path,files)#原来的文件路径
-        if os.path.isdir(Olddir):#如果是文件夹则跳过
-            continue
-        filename = os.path.splitext(files)[0]#文件名
-        filetype = os.path.splitext(files)[1]#文件扩展名
-        Newdir = os.path.join(path, 'water-'+str(count)+filetype)#新的文件路径
-        os.rename(Olddir,Newdir)#重命名
-        count += 1
-
-
 # 尺度变换
-def scale_augmentation(image, i, crop_size):
-    # scale_size = np.random.randint(*scale_range)
-    scale_size = int((0.2*i+1)*crop_size)
-    image = imresize(image, (scale_size, scale_size))
-    # image = random_crop(image, crop_size)
-    image = center_crop(image, crop_size)
-    return image
+def scale_augmentation(dir):
+    i = 1
+    returnStatus = []
+    for filename in os.listdir(dir):
+        imagePath = dir + '/' + filename
+        img = cv2.imread(imagePath, 0)
+        if img is not None:
+            print('第' + str(i) + '张图片为' + filename)
+            i = i + 1
+            crop_size = img.shape[0] if img.shape[0] < img.shape[1] else img.shape[1]
+            for j in range(4):
+                scale_size = int((0.2*j+1)*crop_size)
+                image = imresize(img, (scale_size, scale_size))
+                image = center_crop(image, crop_size)
+                isExists = os.path.exists(save_file)
+                if not isExists:
+                    os.makedirs(save_file)
+                cv2.imwrite(save_file + '/' + filename.split('.')[0] + '-scale-'+str(j+1)+'.tif', image)
+                print('已保存图片')
+        else:
+            print('无法读取' + filename + '图片')
+            returnStatus.append(filename)
+    len_scale = len(returnStatus)
+    results = ''
+    if len_scale == 0:
+        results = '尺度变换已处理完成'
+    else:
+        for i in range(len_scale):
+            single_result = '无法处理' + returnStatus[i] + '图片'
+            results += single_result
+        results += '其他已处理完成'
+    return save_file, results
 
 
 def resize(image, size):
@@ -123,60 +130,37 @@ def resize(image, size):
 
 
 # 旋转
-def random_rotation(i,image):
-    h, w = image.shape
-    angle = i*30
-    image = rotate(image, angle)
-    image = resize(image, (h, w))
-    return image
-
-
-# 生成5张图片
-def generate_image(i, image, arg):
-    count = 1
-    # crop_size = image.shape[0] if image.shape[0] < image.shape[1] else image.shape[1]
-    while 1:
-        # if( arg == 'rotation'):
-        #     images = random_rotation(count, image)
-        # else:
-        #     images = scale_augmentation(image, count, crop_size)
-        images = random_crop(image, 280)
-        # # 显示图片
-        # plt.subplot(121)
-        # plt.imshow(image, cmap='gray')
-        # plt.subplot(122)
-        # plt.imshow(images, cmap='gray')
-        # plt.show()
-        print('正在保存第' + str(i) + '-' + str(count) + '张图片')
-        cv2.imwrite(save_file + str(i) + arg + '-' + str(count) + '.tif', images)
-        count += 1
-        if count == 7:
-            break
-
-
-def read_shape():
-    for i in range(1965):
-        print('正在读取第'+str(i)+'张图片')
-        image = cv2.imread(save_file + 'eddy-'+str(i) + '.tif', 0)
-        if image is not None:
-            print('第' + str(i) + '张图片为', image.shape)
+def random_rotation(dir):
+    i = 1
+    returnStatus = []
+    for filename in os.listdir(dir):
+        imagePath = dir + '/' + filename
+        img = cv2.imread(imagePath, 0)
+        if img is not None:
+            print('第' + str(i) + '张图片为' + filename)
+            i = i + 1
+            for j in range(4):
+                h, w = img.shape
+                angle = j*30
+                image = rotate(img, angle)
+                image = resize(image, (h, w))
+                isExists = os.path.exists(save_file)
+                if not isExists:
+                    os.makedirs(save_file)
+                cv2.imwrite(save_file + '/' + filename.split('.')[0] + '-rotate-' + str(j+1) + '.tif', image)
+                print('已保存图片')
         else:
-            print('无法读取第'+str(i)+'张图片')
-
-
-if __name__ == '__main__':
-    file_rename()
-    # read_shape()
-    # for i in range(15):
-    #     print('正在读取第'+str(i+1)+'张图片')
-    #     image = cv2.imread(data_file + str(i+1) + '.tif', 0)
-    #     generate_image(i, image, 'water')
-    # #     if image is not None:
-    # #         # defined_crop(i, image)
-    # #         # generate_image(i, image, 'rotation')
-    # #         # generate_image(i, image, 'scale')
-    # #     else:
-    # #         print('无法读取第'+str(i)+'张图片')
-    # #     i += 2
+            print('无法读取' + filename + '图片')
+            returnStatus.append(filename)
+    len_rotate = len(returnStatus)
+    results = ''
+    if len_rotate == 0:
+        results = '旋转变换已处理完成'
+    else:
+        for i in range(len_rotate):
+            single_result = '无法处理' + returnStatus[i] + '图片'
+            results += single_result
+        results += '其他已处理完成'
+    return save_file, results
 
 
