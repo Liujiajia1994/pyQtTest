@@ -124,7 +124,7 @@ class Ui_MainWindow(object):
         self.label_show.setMinimumSize(QtCore.QSize(351, 351))
         self.label_show.setMaximumSize(QtCore.QSize(351, 351))
         self.label_show.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_show.setScaledContents(True)
         self.label_show.setAlignment(QtCore.Qt.AlignCenter)
@@ -135,7 +135,7 @@ class Ui_MainWindow(object):
         self.label_show_gray = QtWidgets.QLabel(self.tab_2)
         self.label_show_gray.setGeometry(QtCore.QRect(0, 0, 351, 351))
         self.label_show_gray.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_show_gray.setScaledContents(True)
         self.label_show_gray.setAlignment(QtCore.Qt.AlignCenter)
@@ -243,14 +243,14 @@ class Ui_MainWindow(object):
         self.tab_origin.setObjectName("tab_origin")
         self.label_show_one = QtWidgets.QLabel(self.tab_origin)
         self.label_show_one.setGeometry(QtCore.QRect(180, 170, 171, 151))
-        self.label_show_one.setStyleSheet("QLabel{border: 1px solid rgb(0, 0, 0)}")
+        self.label_show_one.setStyleSheet("QLabel{border: 1px solid  rgb(213, 223, 229);}")
         self.label_show_one.setScaledContents(True)
         self.label_show_one.setAlignment(QtCore.Qt.AlignCenter)
         self.label_show_one.setObjectName("label_show_one")
         self.label_show_two = QtWidgets.QLabel(self.tab_origin)
         self.label_show_two.setGeometry(QtCore.QRect(0, 0, 171, 151))
         self.label_show_two.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_show_two.setScaledContents(True)
         self.label_show_two.setAlignment(QtCore.Qt.AlignCenter)
@@ -258,7 +258,7 @@ class Ui_MainWindow(object):
         self.label_show_three = QtWidgets.QLabel(self.tab_origin)
         self.label_show_three.setGeometry(QtCore.QRect(0, 170, 171, 151))
         self.label_show_three.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid  rgb(213, 223, 229);\n"
 "}")
         self.label_show_three.setScaledContents(True)
         self.label_show_three.setAlignment(QtCore.Qt.AlignCenter)
@@ -266,7 +266,7 @@ class Ui_MainWindow(object):
         self.label_show_four = QtWidgets.QLabel(self.tab_origin)
         self.label_show_four.setGeometry(QtCore.QRect(180, 0, 171, 151))
         self.label_show_four.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_show_four.setScaledContents(True)
         self.label_show_four.setAlignment(QtCore.Qt.AlignCenter)
@@ -277,7 +277,7 @@ class Ui_MainWindow(object):
         self.label_gray_one = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_one.setGeometry(QtCore.QRect(0, 0, 171, 151))
         self.label_gray_one.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_gray_one.setScaledContents(True)
         self.label_gray_one.setAlignment(QtCore.Qt.AlignCenter)
@@ -285,7 +285,7 @@ class Ui_MainWindow(object):
         self.label_gray_two = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_two.setGeometry(QtCore.QRect(180, 0, 171, 151))
         self.label_gray_two.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_gray_two.setScaledContents(True)
         self.label_gray_two.setAlignment(QtCore.Qt.AlignCenter)
@@ -293,7 +293,7 @@ class Ui_MainWindow(object):
         self.label_gray_three = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_three.setGeometry(QtCore.QRect(0, 170, 171, 151))
         self.label_gray_three.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_gray_three.setScaledContents(True)
         self.label_gray_three.setAlignment(QtCore.Qt.AlignCenter)
@@ -301,7 +301,7 @@ class Ui_MainWindow(object):
         self.label_gray_four = QtWidgets.QLabel(self.tab_gray)
         self.label_gray_four.setGeometry(QtCore.QRect(180, 170, 171, 151))
         self.label_gray_four.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_gray_four.setScaledContents(True)
         self.label_gray_four.setAlignment(QtCore.Qt.AlignCenter)
@@ -332,15 +332,15 @@ class Ui_MainWindow(object):
         self.tabWidget.addTab(self.tab_process, icon1, "")
         self.tab_extract = QtWidgets.QWidget()
         self.tab_extract.setObjectName("tab_extract")
-        self.widget = QtWidgets.QWidget(self.tab_extract)
-        self.widget.setGeometry(QtCore.QRect(10, 10, 752, 488))
-        self.widget.setObjectName("widget")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget)
+        self.layoutWidget2 = QtWidgets.QWidget(self.tab_extract)
+        self.layoutWidget2.setGeometry(QtCore.QRect(10, 10, 752, 488))
+        self.layoutWidget2.setObjectName("layoutWidget2")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.layoutWidget2)
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.groupBox_6 = QtWidgets.QGroupBox(self.widget)
+        self.groupBox_6 = QtWidgets.QGroupBox(self.layoutWidget2)
         self.groupBox_6.setMinimumSize(QtCore.QSize(371, 217))
         self.groupBox_6.setObjectName("groupBox_6")
         self.extract = QtWidgets.QPushButton(self.groupBox_6)
@@ -373,26 +373,26 @@ class Ui_MainWindow(object):
 "    border-radius:5px;  \n"
 "}")
         self.extract.setObjectName("extract")
-        self.widget1 = QtWidgets.QWidget(self.groupBox_6)
-        self.widget1.setGeometry(QtCore.QRect(50, 30, 248, 78))
-        self.widget1.setObjectName("widget1")
-        self.gridLayout_5 = QtWidgets.QGridLayout(self.widget1)
+        self.layoutWidget3 = QtWidgets.QWidget(self.groupBox_6)
+        self.layoutWidget3.setGeometry(QtCore.QRect(50, 30, 248, 78))
+        self.layoutWidget3.setObjectName("layoutWidget3")
+        self.gridLayout_5 = QtWidgets.QGridLayout(self.layoutWidget3)
         self.gridLayout_5.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_5.setObjectName("gridLayout_5")
-        self.checkBox_Harris = QtWidgets.QCheckBox(self.widget1)
+        self.checkBox_Harris = QtWidgets.QCheckBox(self.layoutWidget3)
         self.checkBox_Harris.setMinimumSize(QtCore.QSize(120, 35))
         self.checkBox_Harris.setObjectName("checkBox_Harris")
         self.gridLayout_5.addWidget(self.checkBox_Harris, 0, 0, 1, 1)
-        self.checkBox_FD = QtWidgets.QCheckBox(self.widget1)
+        self.checkBox_FD = QtWidgets.QCheckBox(self.layoutWidget3)
         self.checkBox_FD.setMinimumSize(QtCore.QSize(120, 35))
         self.checkBox_FD.setObjectName("checkBox_FD")
         self.gridLayout_5.addWidget(self.checkBox_FD, 0, 1, 1, 1)
-        self.checkBox_GLCM = QtWidgets.QCheckBox(self.widget1)
+        self.checkBox_GLCM = QtWidgets.QCheckBox(self.layoutWidget3)
         self.checkBox_GLCM.setMinimumSize(QtCore.QSize(120, 35))
         self.checkBox_GLCM.setObjectName("checkBox_GLCM")
         self.gridLayout_5.addWidget(self.checkBox_GLCM, 1, 0, 1, 1)
         self.verticalLayout_3.addWidget(self.groupBox_6)
-        self.groupBox_7 = QtWidgets.QGroupBox(self.widget)
+        self.groupBox_7 = QtWidgets.QGroupBox(self.layoutWidget2)
         self.groupBox_7.setMinimumSize(QtCore.QSize(331, 261))
         self.groupBox_7.setObjectName("groupBox_7")
         self.textEdit_info_3 = QtWidgets.QTextEdit(self.groupBox_7)
@@ -400,7 +400,7 @@ class Ui_MainWindow(object):
         self.textEdit_info_3.setObjectName("textEdit_info_3")
         self.verticalLayout_3.addWidget(self.groupBox_7)
         self.horizontalLayout_2.addLayout(self.verticalLayout_3)
-        self.groupBox_9 = QtWidgets.QGroupBox(self.widget)
+        self.groupBox_9 = QtWidgets.QGroupBox(self.layoutWidget2)
         self.groupBox_9.setMinimumSize(QtCore.QSize(371, 486))
         self.groupBox_9.setObjectName("groupBox_9")
         self.comboBox_4 = QtWidgets.QComboBox(self.groupBox_9)
@@ -442,7 +442,7 @@ class Ui_MainWindow(object):
         self.label_extract_origin.setMinimumSize(QtCore.QSize(351, 300))
         self.label_extract_origin.setMaximumSize(QtCore.QSize(351, 351))
         self.label_extract_origin.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_extract_origin.setScaledContents(True)
         self.label_extract_origin.setAlignment(QtCore.Qt.AlignCenter)
@@ -455,7 +455,7 @@ class Ui_MainWindow(object):
         self.label_extract_gray.setMinimumSize(QtCore.QSize(351, 300))
         self.label_extract_gray.setMaximumSize(QtCore.QSize(351, 351))
         self.label_extract_gray.setStyleSheet("QLabel{\n"
-"    border: 1px solid rgb(0, 0, 0)\n"
+"    border: 1px solid rgb(213, 223, 229);\n"
 "}")
         self.label_extract_gray.setScaledContents(True)
         self.label_extract_gray.setAlignment(QtCore.Qt.AlignCenter)

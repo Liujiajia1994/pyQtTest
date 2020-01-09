@@ -260,7 +260,7 @@ p, li { white-space: pre-wrap; }
                </property>
                <property name="styleSheet">
                 <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
                </property>
                <property name="text">
@@ -289,7 +289,7 @@ p, li { white-space: pre-wrap; }
                </property>
                <property name="styleSheet">
                 <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
                </property>
                <property name="text">
@@ -554,7 +554,7 @@ p, li { white-space: pre-wrap; }
                </rect>
               </property>
               <property name="styleSheet">
-               <string notr="true">QLabel{border: 1px solid rgb(0, 0, 0)}</string>
+               <string notr="true">QLabel{border: 1px solid  rgb(213, 223, 229);}</string>
               </property>
               <property name="text">
                <string>暂无</string>
@@ -577,7 +577,7 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
@@ -601,7 +601,7 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid  rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
@@ -625,7 +625,7 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
@@ -654,7 +654,7 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
@@ -678,7 +678,7 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
@@ -702,7 +702,7 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
@@ -726,7 +726,7 @@ p, li { white-space: pre-wrap; }
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
@@ -800,7 +800,7 @@ p, li { white-space: pre-wrap; }
        <attribute name="title">
         <string>特征提取</string>
        </attribute>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -870,7 +870,7 @@ QPushButton:pressed{
                <string>提取特征</string>
               </property>
              </widget>
-             <widget class="QWidget" name="">
+             <widget class="QWidget" name="layoutWidget">
               <property name="geometry">
                <rect>
                 <x>50</x>
@@ -1081,7 +1081,7 @@ QPushButton:pressed{
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
@@ -1122,7 +1122,7 @@ QPushButton:pressed{
               </property>
               <property name="styleSheet">
                <string notr="true">QLabel{
-	border: 1px solid rgb(0, 0, 0)
+	border: 1px solid rgb(213, 223, 229);
 }</string>
               </property>
               <property name="text">
