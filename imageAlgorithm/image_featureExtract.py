@@ -1,7 +1,8 @@
 from skimage.feature import greycomatrix, greycoprops, local_binary_pattern
 from skimage.exposure import equalize_hist
-from skimage.feature import corner_harris
+from skimage.feature import corner_harris, corner_peaks
 from skimage.color import rgb2gray
+import matplotlib.pyplot as plt
 from sklearn import preprocessing
 import cv2
 import numpy as np
@@ -240,3 +241,70 @@ def getMaxContour(pic):
     cts = np.array(contours[max_idx])
     cts = cts.reshape(cts.shape[0], 2)
     return cts
+
+
+def draw_contour(dir, saveDir):
+    i = 1
+    for filename in os.listdir(dir):
+        imagePath = dir + '/' + filename
+        img = cv2.imread(imagePath)
+        if img is not None:
+            print('第' + str(i) + '张图片为' + filename)
+            i = i + 1
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            # 轮廓
+            ret, binary = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY)
+            image, contours, hrc = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+            cv2.drawContours(img, contours, -1, (0, 0, 255), 2)
+            cv2.imshow("show", img)
+            isExists = os.path.exists(saveDir)
+            if not isExists:
+                os.makedirs(saveDir)
+            cv2.imwrite(saveDir + '/' + filename, img)
+            # cv2.waitKey(0)
+
+        else:
+            print('无法保存第' + str(i) + '个图片')
+
+
+def draw_corner(dir, saveDir):
+    i = 1
+    returnStatus = []
+    for filename in os.listdir(dir):
+        imagePath = dir + '/' + filename
+        img = cv2.imread(imagePath)
+        if img is not None:
+            print('第' + str(i) + '张图片为' + filename)
+            i = i + 1
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            # 角点
+            # gray_img = np.float32(gray)
+            # Harris_detector = cv2.cornerHarris(gray_img, 2, 3, 0.04)
+            # dst = cv2.dilate(Harris_detector, None)
+            # thres = 0.01 * dst.max()
+            # img[dst > thres] = [255, 0, 0]
+            mandrill = equalize_hist(gray)
+            # corners = corner_peaks(corner_harris(mandrill), min_distance=1)
+            # 使用corner_harris获取角点
+            corners = corner_peaks(corner_harris(mandrill))
+
+            fig = plt.figure()
+            plt.gray()
+            plt.imshow(mandrill)
+            y_corner, x_corner = zip(*corners)
+            plt.plot(x_corner, y_corner, 'or')
+            plt.xlim(0, mandrill.shape[1])
+            plt.ylim(mandrill.shape[0], 0)
+            fig.set_size_inches(np.array(fig.get_size_inches()) * 1.5)
+            isExists = os.path.exists(saveDir)
+            if not isExists:
+                os.makedirs(saveDir)
+            plt.savefig(saveDir + '/' + filename, dpi=300)
+            # plt.show()
+        else:
+            print('无法保存第' + str(i) + '个图片')
+
+
+# if __name__ == '__main__':
+    # draw_corner('E:/GitHub/pyQtTest/ImagesDataset/SAR_gray_images', 'E:/GitHub/pyQtTest/ImagesDataset/harris_images')
+    # draw_contour('E:/GitHub/pyQtTest/ImagesDataset/SAR_gray_images', 'E:/GitHub/pyQtTest/ImagesDataset/fd_images')
