@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtGui import QPixmap, QPalette, QBrush, QIcon
 from imageAlgorithm.image_gray import *
 from imageAlgorithm.image_preprocess import *
+from imageAlgorithm.image_featureExtract import *
 
 
 class HelloLogin(QtWidgets.QWidget):
@@ -79,6 +80,7 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         self.fileList = []
         self.label_show_list = []
         self.label_gray_list = []
+        self.GLCM_feature = ''
 
         paletteMain = QPalette()
         paletteMain.setBrush(QPalette.Background, QBrush(QPixmap('E:/GitHub/pyQtTest/login_bg.jpg')))
@@ -98,6 +100,12 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         self.ui.comboBox_2.currentIndexChanged.connect(self.changeProcessImage)
         # 预处理 预览-选择预览的图片 下拉框状态变化事件
         self.ui.comboBox_3.currentIndexChanged.connect(self.changeProcessImage)
+        # 特征提取 特征选择 多选框
+        self.ui.checkBox_GLCM.stateChanged.connect(lambda: self.extractMethods(self.ui.checkBox_GLCM))
+        self.ui.checkBox_FD.stateChanged.connect(lambda: self.extractMethods(self.ui.checkBox_FD))
+        self.ui.checkBox_Harris.stateChanged.connect(lambda: self.extractMethods(self.ui.checkBox_Harris))
+        # 特征提取 提取特征 按钮
+        self.ui.extract.clicked.connect(self.extractFeature)
 
     def openFile(self):
         # 打开文件
@@ -145,6 +153,7 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
             self.ui.textEdit_info_2.append("取消选择：" + checkBox.text())
 
     def preProcess(self):
+        boxes = []
         if self.filePath:
             self.ui.textEdit_info_2.append("已载入数据，文件路径："+self.filePath)
             # 获取多选框中的选项
@@ -152,36 +161,39 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
             self.ui.textEdit_info_2.append("最终确定扩充方式：")
             # 信息显示 并将 扩充方式 添加进下拉框
             # 添加新的item
-            # self.ui.comboBox_3.removeItem('请选择')
             for i in range(len(self.fileList)):
                 self.ui.comboBox_3.addItem(self.fileList[i])
             for box in checkBoxes:
                 if box.isChecked():
                     self.ui.comboBox_2.addItem(box.text())
                     self.ui.textEdit_info_2.append(box.text())
-                    # 扩充处理
-                    if box.text() == "随机裁剪":
-                        cropResults = defined_crop(self.filePath)
-                        self.process_dir = cropResults[0]
-                        augument_results = cropResults[1]
-                        self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
-                        self.ui.textEdit_info_2.append('\n' + augument_results)
-                    elif box.text() == "尺度变换":
-                        scaleResults = scale_augmentation(self.filePath)
-                        self.process_dir = scaleResults[0]
-                        augument_results = scaleResults[1]
-                        self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
-                        self.ui.textEdit_info_2.append('\n' + augument_results)
-                    else:
-                        # 旋转变换
-                        rotateResults = random_rotation(self.filePath)
-                        self.process_dir = rotateResults[0]
-                        augument_results = rotateResults[1]
-                        self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
-                        self.ui.textEdit_info_2.append('\n' + augument_results)
+                    boxes.append(box.text())
+            for box in boxes:
+                # 扩充处理
+                if box == "随机裁剪":
+                    cropResults = defined_crop(self.filePath)
+                    self.process_dir = cropResults[0]
+                    augument_results = cropResults[1]
+                    self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
+                    self.ui.textEdit_info_2.append('\n' + augument_results)
+                elif box == "尺度变换":
+                    scaleResults = scale_augmentation(self.filePath)
+                    self.process_dir = scaleResults[0]
+                    augument_results = scaleResults[1]
+                    self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
+                    self.ui.textEdit_info_2.append('\n' + augument_results)
+                else:
+                    # 旋转变换
+                    rotateResults = random_rotation(self.filePath)
+                    self.process_dir = rotateResults[0]
+                    augument_results = rotateResults[1]
+                    self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
+                    self.ui.textEdit_info_2.append('\n' + augument_results)
             # 默认显示
-            self.label_show_list = [self.ui.label_show_one, self.ui.label_show_two, self.ui.label_show_three, self.ui.label_show_four]
-            self.label_gray_list = [self.ui.label_gray_one, self.ui.label_gray_two, self.ui.label_gray_three, self.ui.label_gray_four]
+            self.label_show_list = [self.ui.label_show_one, self.ui.label_show_two, self.ui.label_show_three,
+                                    self.ui.label_show_four]
+            self.label_gray_list = [self.ui.label_gray_one, self.ui.label_gray_two, self.ui.label_gray_three,
+                                    self.ui.label_gray_four]
             return_resluts = image_to_gray(self.process_dir,
                                            'E:/GitHub/pyQtTest/ImagesDataset/SAR_augument_gray_images')
             self.process_gray_dir = return_resluts[0]
@@ -203,7 +215,7 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
             self.ui.textEdit_info_2.append("未载入数据，请至载入数据模块")
 
     def changeProcessImage(self):
-        # 载入数据 下拉框切换
+        # 预处理 下拉框切换
         selectedMethod = self.ui.comboBox_2.currentText()
         choose = ''
         if selectedMethod == '随机裁剪':
@@ -223,6 +235,52 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
                 path = '/' + selectedImage.split('.')[0]+'-'+choose+'-'+str(i+1)+'.tif'
                 self.label_show_list[i].setPixmap(QPixmap(self.process_dir + path))
                 self.label_gray_list[i].setPixmap(QPixmap(self.process_gray_dir + path))
+
+    def extractMethods(self, checkBox):
+        # 特征提取 特征选择
+        if checkBox.isChecked():
+            self.ui.textEdit_info_3.append("已选择："+ checkBox.text())
+        else:
+            self.ui.textEdit_info_3.append("取消选择：" + checkBox.text())
+
+    def extractFeature(self):
+        features = []
+        if self.process_dir and self.filePath:
+            self.ui.textEdit_info_3.append("已载入数据，文件路径："+self.filePath)
+            # 获取多选框中的选项
+            checkBoxes = [self.ui.checkBox_GLCM, self.ui.checkBox_FD, self.ui.checkBox_Harris]
+            self.ui.textEdit_info_3.append("最终确定扩充方式：")
+            # 添加新的item
+            for i in range(len(self.fileList)):
+                self.ui.comboBox_4.addItem(self.fileList[i])
+            for box in checkBoxes:
+                if box.isChecked():
+                    self.ui.comboBox_5.addItem(box.text())
+                    self.ui.textEdit_info_3.append(box.text())
+                    features.append(box.text())
+            for feature in features:
+                # 特征选择
+                if feature == "GLCM纹理特征":
+                    GLCMResults = glcm_feature(self.process_dir)
+                    self.GLCM_feature = GLCMResults[0]
+                    GLCM_results = GLCMResults[1]
+                    self.ui.textEdit_info_3.append('\n' + '灰度共生矩阵特征所在文件：' + self.GLCM_feature)
+                    self.ui.textEdit_info_3.append('\n' + GLCM_results)
+                elif feature == "FD形状特征":
+                    FDResults = fourier_descriptor_feature(self.process_dir)
+                    self.FD_feature = FDResults[0]
+                    FD_feature = FDResults[1]
+                    self.ui.textEdit_info_3.append('\n' + '傅里叶描述子所在文件：' + self.FD_feature)
+                    self.ui.textEdit_info_3.append('\n' + FD_feature)
+                else:
+                    # Harris角点特征
+                    HarrisResults = random_rotation(self.filePath)
+                    self.Harris_feature = HarrisResults[0]
+                    Harris_results = HarrisResults[1]
+                    self.ui.textEdit_info_3.append('\n' + 'Harris角点特征所在文件：' + self.Harris_feature)
+                    self.ui.textEdit_info_3.append('\n' + Harris_results)
+        else:
+            self.ui.textEdit_info_3.append("未载入数据，请至载入数据模块")
 
 
 if __name__ == "__main__":
