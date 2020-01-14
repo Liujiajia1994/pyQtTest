@@ -80,7 +80,8 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         self.fileList = []
         self.label_show_list = []
         self.label_gray_list = []
-        self.GLCM_feature = ''
+        self.featureDir = ''
+        self.featureImagesDir = ''
 
         paletteMain = QPalette()
         paletteMain.setBrush(QPalette.Background, QBrush(QPixmap('E:/GitHub/pyQtTest/login_bg.jpg')))
@@ -106,6 +107,9 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         self.ui.checkBox_Harris.stateChanged.connect(lambda: self.extractMethods(self.ui.checkBox_Harris))
         # 特征提取 提取特征 按钮
         self.ui.extract.clicked.connect(self.extractFeature)
+        # 特征提取 下拉框选择 显示图像
+        self.ui.comboBox_4.currentIndexChanged.connect(self.changeExtractImage)
+        self.ui.comboBox_5.currentIndexChanged.connect(self.changeExtractImage)
 
     def openFile(self):
         # 打开文件
@@ -171,24 +175,16 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
             for box in boxes:
                 # 扩充处理
                 if box == "随机裁剪":
-                    cropResults = defined_crop(self.filePath)
-                    self.process_dir = cropResults[0]
-                    augument_results = cropResults[1]
-                    self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
-                    self.ui.textEdit_info_2.append('\n' + augument_results)
+                    processResults = defined_crop(self.filePath)
                 elif box == "尺度变换":
-                    scaleResults = scale_augmentation(self.filePath)
-                    self.process_dir = scaleResults[0]
-                    augument_results = scaleResults[1]
-                    self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
-                    self.ui.textEdit_info_2.append('\n' + augument_results)
+                    processResults = scale_augmentation(self.filePath)
                 else:
                     # 旋转变换
-                    rotateResults = random_rotation(self.filePath)
-                    self.process_dir = rotateResults[0]
-                    augument_results = rotateResults[1]
-                    self.ui.textEdit_info_2.append('\n' + '扩充图像文件夹：' + self.process_dir)
-                    self.ui.textEdit_info_2.append('\n' + augument_results)
+                    processResults = random_rotation(self.filePath)
+                self.process_dir = processResults[0]
+                augument_results = processResults[1]
+                self.ui.textEdit_info_2.append('\n' + box + '扩充图像文件夹：' + self.process_dir)
+                self.ui.textEdit_info_2.append('\n' + augument_results)
             # 默认显示
             self.label_show_list = [self.ui.label_show_one, self.ui.label_show_two, self.ui.label_show_three,
                                     self.ui.label_show_four]
@@ -239,7 +235,7 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
     def extractMethods(self, checkBox):
         # 特征提取 特征选择
         if checkBox.isChecked():
-            self.ui.textEdit_info_3.append("已选择："+ checkBox.text())
+            self.ui.textEdit_info_3.append("已选择：" + checkBox.text())
         else:
             self.ui.textEdit_info_3.append("取消选择：" + checkBox.text())
 
@@ -261,26 +257,40 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
             for feature in features:
                 # 特征选择
                 if feature == "GLCM纹理特征":
-                    GLCMResults = glcm_feature(self.process_dir)
-                    self.GLCM_feature = GLCMResults[0]
-                    GLCM_results = GLCMResults[1]
-                    self.ui.textEdit_info_3.append('\n' + '灰度共生矩阵特征所在文件：' + self.GLCM_feature)
-                    self.ui.textEdit_info_3.append('\n' + GLCM_results)
+                    featureResults = glcm_feature(self.process_dir)
                 elif feature == "FD形状特征":
-                    FDResults = fourier_descriptor_feature(self.process_dir)
-                    self.FD_feature = FDResults[0]
-                    FD_feature = FDResults[1]
-                    self.ui.textEdit_info_3.append('\n' + '傅里叶描述子所在文件：' + self.FD_feature)
-                    self.ui.textEdit_info_3.append('\n' + FD_feature)
+                    featureResults = fourier_descriptor_feature(self.process_dir)
+                    self.featureImagesDir = draw_contour(self.filePath)
                 else:
                     # Harris角点特征
-                    HarrisResults = random_rotation(self.filePath)
-                    self.Harris_feature = HarrisResults[0]
-                    Harris_results = HarrisResults[1]
-                    self.ui.textEdit_info_3.append('\n' + 'Harris角点特征所在文件：' + self.Harris_feature)
-                    self.ui.textEdit_info_3.append('\n' + Harris_results)
+                    featureResults = harris_feature(self.process_dir)
+                    self.featureImagesDir = draw_corner(self.filePath)
+                self.featureDir = featureResults[0]
+                featureState = featureResults[1]
+                self.ui.textEdit_info_3.append('\n' + feature + '所在文件：' + self.featureDir)
+                self.ui.textEdit_info_3.append('\n' + featureState)
+                line = 1
+                with open(self.featureDir) as file_obj:
+                    for content in file_obj:
+                        if line <= 5:
+                            line += 1
+                            self.ui.textEdit_info_3.append('\n' + content)
+                        else:
+                            break
         else:
             self.ui.textEdit_info_3.append("未载入数据，请至载入数据模块")
+
+    def changeExtractImage(self):
+        # 特征提取 预览 下拉框切换
+        selectedImage = self.ui.comboBox_4.currentText()
+        selectedFeature = self.ui.comboBox_5.currentText()
+        if selectedFeature == '请选择' or selectedImage == '请选择'or selectedFeature == 'GLCM纹理特征':
+            self.ui.label_extract_origin.setText('暂无')
+            self.ui.label_extract_gray.setText('暂无')
+        else:
+            # 显示
+            self.ui.label_extract_origin.setPixmap(QPixmap(self.filePath+'/'+selectedImage))
+            self.ui.label_extract_gray.setPixmap(QPixmap(self.featureImagesDir+'/'+selectedImage))
 
 
 if __name__ == "__main__":
