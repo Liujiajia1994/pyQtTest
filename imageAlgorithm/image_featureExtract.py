@@ -17,10 +17,13 @@ n_points = 8*radius
 fd_len = 67
 pi = 3.1415926
 
+# 特征信息
 save_GLCM_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_GLCM'
 save_FD_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_FD'
 save_Harris_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_Harris'
-
+# 图片
+saveDir_fd = 'E:/GitHub/pyQtTest/ImagesDataset/fd_images'
+saveDir_harris = 'E:/GitHub/pyQtTest/ImagesDataset/harris_images'
 
 # GLCM
 def glcm_feature(dir):
@@ -243,7 +246,7 @@ def getMaxContour(pic):
     return cts
 
 
-def draw_contour(dir, saveDir):
+def draw_contour(dir):
     i = 1
     for filename in os.listdir(dir):
         imagePath = dir + '/' + filename
@@ -257,17 +260,17 @@ def draw_contour(dir, saveDir):
             image, contours, hrc = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
             cv2.drawContours(img, contours, -1, (0, 0, 255), 2)
             cv2.imshow("show", img)
-            isExists = os.path.exists(saveDir)
+            isExists = os.path.exists(saveDir_fd)
             if not isExists:
-                os.makedirs(saveDir)
-            cv2.imwrite(saveDir + '/' + filename, img)
+                os.makedirs(saveDir_fd)
+            cv2.imwrite(saveDir_fd + '/' + filename, img)
             # cv2.waitKey(0)
-
         else:
             print('无法保存第' + str(i) + '个图片')
+    return saveDir_fd
 
 
-def draw_corner(dir, saveDir):
+def draw_corner(dir):
     i = 1
     returnStatus = []
     for filename in os.listdir(dir):
@@ -296,15 +299,11 @@ def draw_corner(dir, saveDir):
             plt.xlim(0, mandrill.shape[1])
             plt.ylim(mandrill.shape[0], 0)
             fig.set_size_inches(np.array(fig.get_size_inches()) * 1.5)
-            isExists = os.path.exists(saveDir)
+            isExists = os.path.exists(saveDir_harris)
             if not isExists:
-                os.makedirs(saveDir)
-            plt.savefig(saveDir + '/' + filename, dpi=300)
+                os.makedirs(saveDir_harris)
+            plt.savefig(saveDir_harris + '/' + filename, dpi=300)
             # plt.show()
         else:
             print('无法保存第' + str(i) + '个图片')
-
-
-# if __name__ == '__main__':
-    # draw_corner('E:/GitHub/pyQtTest/ImagesDataset/SAR_gray_images', 'E:/GitHub/pyQtTest/ImagesDataset/harris_images')
-    # draw_contour('E:/GitHub/pyQtTest/ImagesDataset/SAR_gray_images', 'E:/GitHub/pyQtTest/ImagesDataset/fd_images')
+    return saveDir_harris
