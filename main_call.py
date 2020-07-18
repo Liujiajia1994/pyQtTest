@@ -10,6 +10,7 @@ from PyQt5.QtGui import QPixmap, QPalette, QBrush, QIcon
 from imageAlgorithm.image_gray import *
 from imageAlgorithm.image_preprocess import *
 from imageAlgorithm.image_featureExtract import *
+from imageAlgorithm.fusionRecognition import *
 
 
 class HelloLogin(QtWidgets.QWidget):
@@ -72,16 +73,18 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         self.setWindowIcon(QIcon('E:/GitHub/pyQtTest/logo_2.png'))
         self.setWindowTitle('海洋涡旋自动识别系统')
 
-        # 定义一些该类的变量
         self.filePath = ''
+        self.targetFilePath = ''
         self.gray_dir = ''
         self.process_dir = ''
         self.process_gray_dir = ''
         self.fileList = []
         self.label_show_list = []
         self.label_gray_list = []
-        self.featureDir = ''
+        # 提取的几个特征的文件路径数组
+        self.featureDir = []
         self.featureImagesDir = ''
+        self.featureFile = 'E:\GitHub\pyQtTest\ImagesDataset'
 
         paletteMain = QPalette()
         paletteMain.setBrush(QPalette.Background, QBrush(QPixmap('E:/GitHub/pyQtTest/login_bg.jpg')))
@@ -110,21 +113,24 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
         # 特征提取 下拉框选择 显示图像
         self.ui.comboBox_4.currentIndexChanged.connect(self.changeExtractImage)
         self.ui.comboBox_5.currentIndexChanged.connect(self.changeExtractImage)
+        # 训练与识别 训练前 划分方式 微调框
+        # self.ui.spinBox.valueChanged.connect(self.changeValue)
+        # self.ui.spinBox_2.valueChanged.connect(self.changeValue)
+        # 训练与识别 训练前 下拉框 融合方式
+        # self.ui.comboBox_6.currentIndexChanged.connect(self.changeFusion)
+        # 训练与识别 训练前 确定按钮
+        self.ui.recognizeButton.clicked.connect(self.recognizeMain)
 
     def openFile(self):
-        # 打开文件
-        # filename, _ = QFileDialog.getOpenFileName(self, "打开文件", "/", "image Files (*.png *.tif *.jpg)")
-        # self.ui.label_show.setPixmap(QPixmap(filename))
-        # self.ui.textEdit_info.setText("选择文件夹名称："+filename)
         # 打开文件夹
         filePath = QFileDialog.getExistingDirectory(self, "打开文件夹", "/", )
         self.filePath = filePath
-        self.ui.textEdit_info.setText("选择文件夹名称：" + filePath)
+        self.ui.textEdit_info.setText("选择数据集文件夹名称：" + filePath)
         # 读取该文件夹下的所有文件
         self.fileList = os.listdir(filePath)
         #  下拉框中显示文件夹下所有图片
         fileLength = len(self.fileList)
-        self.ui.textEdit_info.append('\n'+'文件夹中图片个数：'+ str(fileLength))
+        self.ui.textEdit_info.append('\n'+'数据集文件夹中图片个数：'+ str(fileLength))
         # 清空已有的comboBox里的所有item
         self.ui.comboBox.clear()
         # 添加新的item
@@ -240,6 +246,10 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
             self.ui.textEdit_info_3.append("取消选择：" + checkBox.text())
 
     def extractFeature(self):
+        if os.path.exists(self.featureFile):
+            pass
+        else:
+            os.mkdir(self.featureFile)
         features = []
         if self.process_dir and self.filePath:
             self.ui.textEdit_info_3.append("已载入数据，文件路径："+self.filePath)
@@ -265,12 +275,13 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
                     # Harris角点特征
                     featureResults = harris_feature(self.process_dir)
                     self.featureImagesDir = draw_corner(self.filePath)
-                self.featureDir = featureResults[0]
+                featurePath = featureResults[0]
+                self.featureDir.append(featurePath)
                 featureState = featureResults[1]
-                self.ui.textEdit_info_3.append('\n' + feature + '所在文件：' + self.featureDir)
+                self.ui.textEdit_info_3.append('\n' + feature + '所在文件：' + featurePath)
                 self.ui.textEdit_info_3.append('\n' + featureState)
                 line = 1
-                with open(self.featureDir) as file_obj:
+                with open(featurePath) as file_obj:
                     for content in file_obj:
                         if line <= 5:
                             line += 1
@@ -291,6 +302,76 @@ class MainWindow(QtWidgets.QMainWindow, HelloLogin):
             # 显示
             self.ui.label_extract_origin.setPixmap(QPixmap(self.filePath+'/'+selectedImage))
             self.ui.label_extract_gray.setPixmap(QPixmap(self.featureImagesDir+'/'+selectedImage))
+
+    def changeValue(self):
+        # 训练与识别 划分方式 微调框
+        if self.ui.spinBox.value() & self.ui.spinBox_2.value():
+            self.ui.textEdit_info_4.append('已选择划分方式：'+str(self.ui.spinBox.value())+'次'+str(self.ui.spinBox_2.value())
+                                         + '折交叉验证')
+        else:
+            self.ui.textEdit_info_4.append('请重新输入划分方式！')
+
+    def changeFusion(self):
+        # 训练与识别 融合方式 下拉框
+        selectedFusion = self.ui.comboBox_6.currentText()
+        if selectedFusion == '请选择':
+           pass
+        else:
+            self.ui.textEdit_info_4.append('已选择融合方式：' + selectedFusion)
+
+    def recognizeMain(self):
+        textEdit = self.ui.textEdit_info_4
+        num = self.ui.spinBox.value()
+        fold = self.ui.spinBox_2.value()
+        fusionWay = self.ui.comboBox_6.currentText()
+        fileDir = []
+        target_file = self.featureFile + '\\target.txt'
+        if os.listdir(self.featureFile):
+            if num == 0 or fold == 0:
+                textEdit.append('请重新输入划分方式！')
+            elif fusionWay == '请选择':
+                textEdit.append('请重新选择融合方式！')
+            else:
+                textEdit.append('已选择划分方式：' + str(num) + '次' + str(fold) + '折交叉验证')
+                textEdit.append('已选择融合方式：' + fusionWay)
+                if os.path.isfile(self.featureFile+'\\feature_Harris.txt'):
+                    textEdit.append('特征数据' +self.featureFile+'\\feature_Harris.txt')
+                    fileDir.append(self.featureFile+'\\feature_Harris.txt')
+                    flag_1 = 1
+                else:
+                    flag_1 = 0
+                if os.path.isfile(self.featureFile+'\\feature_GLCM.txt'):
+                    textEdit.append('特征数据' + self.featureFile + '\\feature_GLCM.txt')
+                    fileDir.append(self.featureFile+'\\feature_GLCM.txt')
+                    flag_2 = 1
+                else:
+                    flag_2 = 0
+                if os.path.isfile(self.featureFile+'\\feature_FD.txt'):
+                    textEdit.append('特征数据' + self.featureFile + '\\feature_FD.txt')
+                    flag_3 = 1
+                    fileDir.append(self.featureFile + '\\feature_FD.txt')
+                else:
+                    flag_3 = 0
+                if flag_1 or flag_2 or flag_3:
+                    if fusionWay == '多特征串行融合':
+                        if fold < 2:
+                            textEdit.append('必须在2以上，请重新输入！')
+                        else:
+                            value_linear, value_rbf, value_poly, value_sigmod, value_KNN, value_MLP, value_DT = fearureSerialFusin(num, fold, fileDir, target_file)
+                            self.ui.lineEdit_linear.setText(str(value_linear))
+                            self.ui.lineEdit_rbf.setText(str(value_rbf))
+                            self.ui.lineEdit_poly.setText(str(value_poly))
+                            self.ui.lineEdit_sigmod.setText(str(value_sigmod))
+                            self.ui.lineEdit_KNN.setText(str(value_KNN))
+                            self.ui.lineEdit_MLP.setText(str(value_MLP))
+                            self.ui.lineEdit_DT.setText(str(value_DT))
+                            self.ui.lineEdit_precomputed.setText(str('-----'))
+                    else:
+                        textEdit.append('自适应加权融合目前还在调整中！敬请期待！')
+                else:
+                    textEdit.append('特征集为空！请至载入数据模块重新载入数据！')
+        else:
+            textEdit.append('特征集为空！请至载入数据模块重新载入数据！')
 
 
 if __name__ == "__main__":

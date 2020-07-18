@@ -92,8 +92,8 @@ QTabBar::tab:selected{
               <widget class="QPushButton" name="open_file">
                <property name="geometry">
                 <rect>
-                 <x>100</x>
-                 <y>50</y>
+                 <x>90</x>
+                 <y>80</y>
                  <width>151</width>
                  <height>51</height>
                 </rect>
@@ -1156,7 +1156,7 @@ QPushButton:pressed{
        <attribute name="title">
         <string>训练与识别</string>
        </attribute>
-       <widget class="QWidget" name="">
+       <widget class="QWidget" name="layoutWidget">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -1179,7 +1179,7 @@ QPushButton:pressed{
              <property name="title">
               <string>训练前</string>
              </property>
-             <widget class="QPushButton" name="extract_2">
+             <widget class="QPushButton" name="recognizeButton">
               <property name="geometry">
                <rect>
                 <x>130</x>
@@ -1226,7 +1226,7 @@ QPushButton:pressed{
                <string>确定</string>
               </property>
              </widget>
-             <widget class="QWidget" name="">
+             <widget class="QWidget" name="layoutWidget">
               <property name="geometry">
                <rect>
                 <x>50</x>
@@ -1307,7 +1307,7 @@ QPushButton:pressed{
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="">
+             <widget class="QWidget" name="layoutWidget">
               <property name="geometry">
                <rect>
                 <x>50</x>
@@ -1425,7 +1425,7 @@ QPushButton:pressed{
              <string>%</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit_5">
+           <widget class="QLineEdit" name="lineEdit_rbf">
             <property name="geometry">
              <rect>
               <x>220</x>
@@ -1460,7 +1460,7 @@ QPushButton:pressed{
              <string>%</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit_6">
+           <widget class="QLineEdit" name="lineEdit_poly">
             <property name="geometry">
              <rect>
               <x>50</x>
@@ -1495,7 +1495,7 @@ QPushButton:pressed{
              <string>%</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit_7">
+           <widget class="QLineEdit" name="lineEdit_sigmod">
             <property name="geometry">
              <rect>
               <x>240</x>
@@ -1530,7 +1530,7 @@ QPushButton:pressed{
              <string>%</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit_8">
+           <widget class="QLineEdit" name="lineEdit_precomputed">
             <property name="geometry">
              <rect>
               <x>81</x>
@@ -1620,7 +1620,7 @@ QPushButton:pressed{
              <string>%</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit_2">
+           <widget class="QLineEdit" name="lineEdit_linear">
             <property name="geometry">
              <rect>
               <x>51</x>
@@ -1731,7 +1731,7 @@ QPushButton:pressed{
              <string>sigmoid</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit_3">
+           <widget class="QLineEdit" name="lineEdit_DT">
             <property name="geometry">
              <rect>
               <x>40</x>
@@ -1804,7 +1804,7 @@ QPushButton:pressed{
              <string>%</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="lineEdit_KNN">
             <property name="geometry">
              <rect>
               <x>40</x>
@@ -1877,7 +1877,7 @@ QPushButton:pressed{
              <string>%</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit_4">
+           <widget class="QLineEdit" name="lineEdit_MLP">
             <property name="geometry">
              <rect>
               <x>220</x>
