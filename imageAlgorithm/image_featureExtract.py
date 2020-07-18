@@ -8,6 +8,7 @@ import cv2
 import numpy as np
 import math
 import os
+import re
 
 
 MIN_DESCRIPTOR = 18
@@ -18,9 +19,12 @@ fd_len = 67
 pi = 3.1415926
 
 # 特征信息
-save_GLCM_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_GLCM'
-save_FD_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_FD'
-save_Harris_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_Harris'
+save_GLCM_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_GLCM.txt'
+save_FD_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_FD.txt'
+save_Harris_file = 'E:/GitHub/pyQtTest/ImagesDataset/feature_Harris.txt'
+# 类别信息
+save_target= 'E:/GitHub/pyQtTest/ImagesDataset/target.txt'
+
 # 图片
 saveDir_fd = 'E:/GitHub/pyQtTest/ImagesDataset/fd_images'
 saveDir_harris = 'E:/GitHub/pyQtTest/ImagesDataset/harris_images'
@@ -29,6 +33,8 @@ saveDir_harris = 'E:/GitHub/pyQtTest/ImagesDataset/harris_images'
 def glcm_feature(dir):
     i = 1
     returnStatus = []
+    if os.path.isfile(save_target):
+        os.remove(save_target)
     for filename in os.listdir(dir):
         imagePath = dir + '/' + filename
         img = cv2.imread(imagePath, 0)
@@ -58,12 +64,23 @@ def glcm_feature(dir):
             #         sumH = homogeneity[i][j] +sumH
             # averageHomo = sumH/4
             with open(save_GLCM_file, 'a') as file:
-                # for row in range(4):
-                #     for col in range(4):
-                #         file.write(str(contrast[row][col])+' '+str(correlation[row][col])+' '+str(energy[row][col])+' '
-                #                    +str(homogeneity[row][col]))
-                file.write(str(contrast)+' '+str(correlation)+' '+str(energy)+' '+str(homogeneity)+'\n')
+                for row in range(1):
+                     for col in range(4):
+                         file.write(str(contrast[row][col])+' '+str(correlation[row][col])+' '+str(energy[row][col])+' '
+                                    +str(homogeneity[row][col]) +' ')
+                # file.write(str(contrast)+' '+str(correlation)+' '+str(energy)+' '+str(homogeneity)+'\n')
+                file.write('\n')
             file.close()
+            # 写类别
+
+            with open(save_target, 'a') as file_target:
+                if re.match(r'water', filename):
+                    file_target.write(str(2)+'\n')
+                elif re.match(r'land', filename):
+                    file_target.write(str(1)+'\n')
+                else:
+                    file_target.write(str(0)+'\n')
+            file_target.close()
             print('第' + str(i) + '张图片提取完成')
         else:
             print('无法读取' + filename + '图片')
@@ -84,6 +101,8 @@ def glcm_feature(dir):
 def harris_feature(dir):
     i = 1
     returnStatus = []
+    if os.path.isfile(save_target):
+        os.remove(save_target)
     for filename in os.listdir(dir):
         imagePath = dir + '/' + filename
         img = cv2.imread(imagePath, 0)
@@ -95,8 +114,20 @@ def harris_feature(dir):
             # 使用corner_harris获取角点
             harris = corner_harris(mandrill)
             with open(save_Harris_file, 'a') as file:
-                file.write(str(harris) + '\n')
+                # ile.write(str(harris) + '\n')
+                for k in range(20):
+                        file.write(str(harris[k][0])+' ')
+                file.write('\n')
             file.close()
+            # 写类别
+            with open(save_target, 'a') as file_target:
+                if re.match('water', filename):
+                    file_target.write(str(2) + '\n')
+                elif re.match('land', filename):
+                    file_target.write(str(1) + '\n')
+                else:
+                    file_target.write(str(0) + '\n')
+            file_target.close()
             print('第' + str(i) + '张图片提取完成')
         else:
             print('无法读取' + filename + '图片')
@@ -196,6 +227,8 @@ def getContours(pic):
 def fourier_descriptor_feature(dir):
     i = 1
     returnStatus = []
+    if os.path.isfile(save_target):
+        os.remove(save_target)
     for filename in os.listdir(dir):
         imagePath = dir + '/' + filename
         img = cv2.imread(imagePath, 0)
@@ -213,8 +246,19 @@ def fourier_descriptor_feature(dir):
             # 傅立叶描述子
             fds = FDFT(shape_signt)
             with open(save_FD_file, 'a') as file:
-                file.write(str(fds) + '\n')
+                # file.write(str(fds) + '\n')
+                for j in range(67):
+                    file.write(str(fds[j])+' ')
             file.close()
+            # 写类别
+            with open(save_target, 'a') as file_target:
+                if re.match('water', filename):
+                    file_target.write(str(2) + '\n')
+                elif re.match('land', filename):
+                    file_target.write(str(1) + '\n')
+                else:
+                    file_target.write(str(0) + '\n')
+            file_target.close()
             print('第' + str(i) + '张图片提取完成')
         else:
             print('无法读取' + filename + '图片')

@@ -16,7 +16,7 @@ def image_to_gray(dir, saveDir):
         if image is not None:
             image = cv2.resize(image, (280, 280), interpolation=cv2.INTER_CUBIC)
             gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            #     将SAR图像进行灰度显示
+            # 将SAR图像进行灰度显示
             plt.imshow(gray_image, cmap='gray')
             # 去掉坐标刻度
             plt.xticks([])
@@ -51,3 +51,13 @@ def image_to_gray(dir, saveDir):
             results += single_result
         results += '其他已处理完成'
     return saveDir, results
+
+
+# 对每个图像加上类别
+def imageToLabel(dir):
+    # 获取文件的个数
+    i = 1
+    returnStatus = []
+    for filename in os.listdir(dir):
+        print('正在读取第' + str(i) + '个图片')
+        imagePath = dir + '/' + filename
